@@ -7,10 +7,40 @@ import numpy as np
 import statistics
 import pandas as pd
 import seaborn as sns
+import re
 
-x = [0,3,6,7,15,10,16,5,8,1.5]
-y = [1,2,1,4.5,-1,2.5,11,6,9,12]
-cities_names = ["Gliwice", "Cairo", "Rome", "Krakow", "Paris", "Alexandria", "Berlin", "Tokyo", "Rio", "Budapest"]
+st.title("City Coordinates Input")
+
+
+with st.form("city_form"):
+    st.write("Enter up to 10 cities with their coordinates (x, y) in range 1-10.") 
+    cities = []
+    x_coords = []
+    y_coords = [] 
+    
+    for i in range(10):
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            loc = st.text_input(f"City {i+1}", key=f"loc_{i}")
+        with col2:
+            x = st.number_input(f"x-coordinate (City {i+1})", min_value=1, max_value=10, key=f"x_{i}")
+        with col3:
+            y = st.number_input(f"y-coordinate (City {i+1})", min_value=1, max_value=10, key=f"y_{i}")
+        
+        if loc:
+            cities.append(loc)
+            x_coords.append(x)
+            y_coords.append(y)
+    
+    submitted = st.form_submit_button("Submit")
+
+
+#x = [0,3,6,7,15,10,16,5,8,1.5]
+#y = [1,2,1,4.5,-1,2.5,11,6,9,12]
+x = x_coords
+y = y_coords
+#cities_names = ["Gliwice", "Cairo", "Rome", "Krakow", "Paris", "Alexandria", "Berlin", "Tokyo", "Rio", "Budapest"]
+cities_names = cities
 city_coords = dict(zip(cities_names, zip(x, y)))
 n_population = 250
 crossover_per = 0.8
@@ -22,16 +52,16 @@ colors = sns.color_palette("pastel", len(cities_names))
 
 # City Icons
 city_icons = {
-    "Gliwice": "♕",
-    "Cairo": "♖",
-    "Rome": "♗",
-    "Krakow": "♘",
-    "Paris": "♙",
-    "Alexandria": "♔",
-    "Berlin": "♚",
-    "Tokyo": "♛",
-    "Rio": "♜",
-    "Budapest": "♝"
+    cities_names[0]: "♕",
+    cities_names[1]: "♖",
+    cities_names[2]: "♗",
+    cities_names[3]: "♘",
+    cities_names[4]: "♙",
+    cities_names[5]: "♔",
+    cities_names[6]: "♚",
+    cities_names[7]: "♛",
+    cities_names[8]: "♜",
+    cities_names[9]: "♝"
 }
 
 fig, ax = plt.subplots()
@@ -51,9 +81,9 @@ for i, (city, (city_x, city_y)) in enumerate(city_coords.items()):
         if i != j:
             ax.plot([city_x, other_x], [city_y, other_y], color='gray', linestyle='-', linewidth=1, alpha=0.1)
 
-fig.set_size_inches(16, 12)
+fig.set_size_inches(10, 8)
 
-st.pyplot(fig) #tukar sini
+st.pyplot(fig)
 
 #population function 
 
@@ -328,4 +358,4 @@ for i, txt in enumerate(shortest_path):
     ax.annotate(str(i+1)+ "- " + txt, (x_shortest[i], y_shortest[i]), fontsize= 20)
 
 fig.set_size_inches(16, 12)  
-st.pyplot(fig) #kena tukar yang ni, st, dlam google collabb plt.show()
+st.pyplot(fig)
