@@ -1,5 +1,4 @@
 import random
-import streamlit as st
 
 #POP_SIZE: Number of Chromosomes in our list.
 POP_SIZE = 500
@@ -8,7 +7,7 @@ POP_SIZE = 500
 MUT_RATE = 0.2
 
 #TARGET: Our goal.
-TARGET = 'Ali'
+TARGET = 'ali'
 
 #GENES: Options from which our population would be created.
 GENES = ' abcdefghijklmnopqrstuvwxyz'
@@ -26,6 +25,8 @@ def initialize_pop(TARGET):
       population.append(temp)
 
   return population
+
+
 #fitness calculation
 #0 fitness means target found
 
@@ -35,6 +36,7 @@ def fitness_cal(TARGET, chromo_from_pop):
       if tar_char != chromo_char:
           difference+=1
   return [chromo_from_pop, difference]
+
 
 #selection
 #returns top 50% population sorted according to fitness
@@ -59,6 +61,7 @@ def crossover(selected_chromo, CHROMO_LEN, population):
     offspring_cross.extend([child])
   return offspring_cross
 
+
 #mutation
 
 def mutate(offspring, MUT_RATE):
@@ -80,6 +83,7 @@ def replace(new_gen, population):
         population[_][0] = new_gen[_][0]
         population[_][1] = new_gen[_][1]
   return population
+
 
 #main
 
@@ -119,11 +123,11 @@ def main(POP_SIZE, MUT_RATE, TARGET, GENES):
 
 
       if (population[0][1] == 0):
-        st.write('Target found')
-        st.write('String: ' + str(population[0][0]) + ' Generation: ' + str(generation) + ' Fitness: ' + str(population[0][1]))
+        print('Target found')
+        print('String: ' + str(population[0][0]) + ' Generation: ' + str(generation) + ' Fitness: ' + str(population[0][1]))
         break
-      st.write('String: ' + str(population[0][0]) + ' Generation: ' + str(generation) + ' Fitness: ' + str(population[0][1]))
+      print('String: ' + str(population[0][0]) + ' Generation: ' + str(generation) + ' Fitness: ' + str(population[0][1]))
       generation+=1
 
 result = main(POP_SIZE, MUT_RATE, TARGET, GENES)
-#st.write(result)
+
