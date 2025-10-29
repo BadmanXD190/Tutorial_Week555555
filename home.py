@@ -16,7 +16,7 @@ st.write(
     """
 )
 
-banner_image = 'https://i.pinimg.com/originals/ee/30/f1/ee30f14577bde682a5ed60b0f641d046.png' 
+banner_image = 'https://www.psychologs.com/wp-content/uploads/2023/08/The-Psychology-of-Rich-People.jpg' 
 st.image(banner_image, use_container_width =True)
 
 # Add the main paragraph and explanation
