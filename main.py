@@ -2,7 +2,7 @@ import streamlit as st
 
 # Set the title and icon for the page
 st.set_page_config(
-    page_title="Wuhuuuuuuuuuuuuuuu", #untuk header taskbar
+    page_title="Kerjalah kat UMK", #untuk header taskbar
     page_icon="🎓", #untuk header taskbar
 )
 
